@@ -72,6 +72,22 @@ func (s *server) Delete(ctx context.Context, req *desc.DeleteRequest) (*emptypb.
 }
 
 func (s *server) SendMessage(ctx context.Context, req *desc.SendMessageRequest) (*emptypb.Empty, error) {
+	builderInsert := sq.Insert("messages").
+		PlaceholderFormat(sq.Dollar).
+		Columns("id", "chat_id", "sender", "text", "created_at").
+		Values(randInt64Positive(), req.GetChatId(), req.GetFrom(), req.GetText(), req.GetTimestamp().AsTime())
+
+	query, args, err := builderInsert.ToSql()
+	if err != nil {
+		return &emptypb.Empty{}, status.Errorf(codes.Internal, "failed to build SQL query: %v", err)
+	}
+
+	res, err := s.db.Exec(ctx, query, args...)
+	if err != nil {
+		return &emptypb.Empty{}, status.Errorf(codes.Internal, "failed to insert message: %v", err)
+	}
+
+	log.Printf("inserted %d rows", res.RowsAffected())
 
 	return &emptypb.Empty{}, nil
 }
