@@ -2,19 +2,23 @@ package main
 
 import (
 	"context"
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
 	"log"
 	"net"
 	"os"
 	"time"
 
-	"github.com/brianvoe/gofakeit"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/reflection"
+	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
 
+	sq "github.com/Masterminds/squirrel"
 	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
 )
 
@@ -26,10 +30,25 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {
-	log.Printf("Creating chat for %v", req.GetUsernames())
+	builderInsert := sq.Insert("chats").
+		PlaceholderFormat(sq.Dollar).
+		Columns("id", "usernames").
+		Values(randInt64Positive(), req.GetUsernames()).
+		Suffix("RETURNING id")
+
+	query, args, err := builderInsert.ToSql()
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to build SQL query: %v", err)
+	}
+
+	var chatId int64
+	err = s.db.QueryRow(ctx, query, args...).Scan(&chatId)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to insert chat: %v", err)
+	}
 
 	return &desc.CreateResponse{
-		Id: gofakeit.Int64(),
+		Id: chatId,
 	}, nil
 }
 
@@ -43,6 +62,13 @@ func (s *server) SendMessage(ctx context.Context, req *desc.SendMessageRequest) 
 	log.Printf("Sending message from %s, at %s", req.GetFrom(), req.GetTimestamp().AsTime().Format(time.RFC3339))
 
 	return &emptypb.Empty{}, nil
+}
+
+func randInt64Positive() int64 {
+	var b [8]byte
+	rand.Read(b[:])
+	u := int64(binary.LittleEndian.Uint64(b[:]))
+	return int64(u & 0x7FFFFFFFFFFFFFFF)
 }
 
 func getDSN() string {

@@ -1,7 +1,7 @@
 -- +goose Up
 CREATE TABLE chats (
-    id uuid PRIMARY KEY,
-    usersnames text[],
+    id bigint PRIMARY KEY,
+    usernames text[],
     created_at timestamp NOT NULL DEFAULT now(),
     updated_at timestamp
 );
