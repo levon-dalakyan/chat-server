@@ -53,7 +53,21 @@ func (s *server) Create(ctx context.Context, req *desc.CreateRequest) (*desc.Cre
 }
 
 func (s *server) Delete(ctx context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {
-	log.Printf("Deleting chat, id: %d", req.GetId())
+	builderDelete := sq.Delete("chats").
+		PlaceholderFormat(sq.Dollar).
+		Where(sq.Eq{"id": req.GetId()})
+
+	query, args, err := builderDelete.ToSql()
+	if err != nil {
+		return &emptypb.Empty{}, status.Errorf(codes.Internal, "failed to build SQL query: %v", err)
+	}
+
+	res, err := s.db.Exec(ctx, query, args...)
+	if err != nil {
+		return &emptypb.Empty{}, status.Errorf(codes.Internal, "failed to delete chat: %v", err)
+	}
+
+	log.Printf("deleted %d rows", res.RowsAffected())
 
 	return &emptypb.Empty{}, nil
 }
