@@ -8,41 +8,32 @@ import (
 	"github.com/brianvoe/gofakeit/v7"
 	"github.com/gojuno/minimock/v3"
 	"github.com/stretchr/testify/require"
+	"google.golang.org/protobuf/types/known/emptypb"
 
 	"github.com/levon-dalakyan/chat-server/internal/api/chats"
-	"github.com/levon-dalakyan/chat-server/internal/model"
 	"github.com/levon-dalakyan/chat-server/internal/service"
 	"github.com/levon-dalakyan/chat-server/internal/service/mocks"
 	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
 )
 
-func TestCreate(t *testing.T) {
+func TestDelete(t *testing.T) {
 	t.Parallel()
 	type chatsServiceMockFunc func(mc *minimock.Controller) service.ChatsService
 
 	type args struct {
 		ctx context.Context
-		req *desc.CreateRequest
+		req *desc.DeleteRequest
 	}
 
 	var (
 		ctx = context.Background()
 		mc  = minimock.NewController(t)
 
-		id        = gofakeit.Int64()
-		usernames = []string{gofakeit.Username(), gofakeit.Username()}
+		id = gofakeit.Int64()
 
 		serviceErr = fmt.Errorf("service error")
 
-		req = &desc.CreateRequest{
-			Usernames: usernames,
-		}
-
-		chatCreateData = &model.ChatCreate{
-			UserNames: usernames,
-		}
-
-		res = &desc.CreateResponse{
+		req = &desc.DeleteRequest{
 			Id: id,
 		}
 	)
@@ -50,7 +41,7 @@ func TestCreate(t *testing.T) {
 	tests := []struct {
 		name             string
 		args             args
-		want             *desc.CreateResponse
+		want             *emptypb.Empty
 		err              error
 		chatsServiceMock chatsServiceMockFunc
 	}{
@@ -60,11 +51,11 @@ func TestCreate(t *testing.T) {
 				ctx: ctx,
 				req: req,
 			},
-			want: res,
+			want: &emptypb.Empty{},
 			err:  nil,
 			chatsServiceMock: func(mc *minimock.Controller) service.ChatsService {
 				mock := mocks.NewChatsServiceMock(mc)
-				mock.CreateMock.Expect(ctx, chatCreateData).Return(id, nil)
+				mock.DeleteMock.Expect(ctx, id).Return(nil)
 				return mock
 			},
 		},
@@ -74,11 +65,11 @@ func TestCreate(t *testing.T) {
 				ctx: ctx,
 				req: req,
 			},
-			want: nil,
+			want: &emptypb.Empty{},
 			err:  serviceErr,
 			chatsServiceMock: func(mc *minimock.Controller) service.ChatsService {
 				mock := mocks.NewChatsServiceMock(mc)
-				mock.CreateMock.Expect(ctx, chatCreateData).Return(0, serviceErr)
+				mock.DeleteMock.Expect(ctx, id).Return(serviceErr)
 				return mock
 			},
 		},
@@ -91,7 +82,7 @@ func TestCreate(t *testing.T) {
 			chatsServiceMock := tt.chatsServiceMock(mc)
 			api := chats.NewImplementation(chatsServiceMock)
 
-			res, err := api.Create(tt.args.ctx, tt.args.req)
+			res, err := api.Delete(tt.args.ctx, tt.args.req)
 			require.Equal(t, tt.err, err)
 			require.Equal(t, tt.want, res)
 		})
