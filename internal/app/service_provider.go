@@ -4,10 +4,11 @@ import (
 	"context"
 	"log"
 
+	"github.com/levon-dalakyan/platform-common/pkg/closer"
+	"github.com/levon-dalakyan/platform-common/pkg/db"
+	"github.com/levon-dalakyan/platform-common/pkg/db/pg"
+
 	chatsApi "github.com/levon-dalakyan/chat-server/internal/api/chats"
-	"github.com/levon-dalakyan/chat-server/internal/client/db"
-	"github.com/levon-dalakyan/chat-server/internal/client/db/pg"
-	"github.com/levon-dalakyan/chat-server/internal/closer"
 	"github.com/levon-dalakyan/chat-server/internal/config"
 	"github.com/levon-dalakyan/chat-server/internal/repository"
 	chatsRepository "github.com/levon-dalakyan/chat-server/internal/repository/chats"

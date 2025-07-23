@@ -8,7 +8,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/levon-dalakyan/chat-server/internal/client/db"
+	"github.com/levon-dalakyan/platform-common/pkg/db"
+
 	"github.com/levon-dalakyan/chat-server/internal/helpers"
 	"github.com/levon-dalakyan/chat-server/internal/model"
 	"github.com/levon-dalakyan/chat-server/internal/repository"

@@ -9,7 +9,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/levon-dalakyan/chat-server/internal/closer"
+	"github.com/levon-dalakyan/platform-common/pkg/closer"
+
 	"github.com/levon-dalakyan/chat-server/internal/config"
 	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
 )
