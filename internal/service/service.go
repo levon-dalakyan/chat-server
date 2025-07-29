@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/levon-dalakyan/chat-server/internal/model"
+	"github.com/ldevprog/chat-server/internal/model"
 )
 
 type ChatsService interface {

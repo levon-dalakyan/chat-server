@@ -5,7 +5,7 @@ import (
 
 	"google.golang.org/protobuf/types/known/emptypb"
 
-	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
+	desc "github.com/ldevprog/chat-server/pkg/chat_v1"
 )
 
 func (i *Implementation) Delete(ctx context.Context, req *desc.DeleteRequest) (*emptypb.Empty, error) {

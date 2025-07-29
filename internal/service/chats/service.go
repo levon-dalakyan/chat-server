@@ -1,8 +1,8 @@
 package chats
 
 import (
-	"github.com/levon-dalakyan/chat-server/internal/repository"
-	"github.com/levon-dalakyan/chat-server/internal/service"
+	"github.com/ldevprog/chat-server/internal/repository"
+	"github.com/ldevprog/chat-server/internal/service"
 )
 
 type serv struct {

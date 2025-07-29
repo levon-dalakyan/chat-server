@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/levon-dalakyan/chat-server/pkg/chat_v1;chat_v1";
+option go_package = "github.com/ldevprog/chat-server/pkg/chat_v1;chat_v1";
 
 service ChatV1 {
   rpc Create(CreateRequest) returns (CreateResponse);

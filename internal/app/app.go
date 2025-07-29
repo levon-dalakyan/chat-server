@@ -9,10 +9,10 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
 
-	"github.com/levon-dalakyan/platform-common/pkg/closer"
+	"github.com/ldevprog/platform-common/pkg/closer"
 
-	"github.com/levon-dalakyan/chat-server/internal/config"
-	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
+	"github.com/ldevprog/chat-server/internal/config"
+	desc "github.com/ldevprog/chat-server/pkg/chat_v1"
 )
 
 type App struct {

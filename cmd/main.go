@@ -5,7 +5,7 @@ import (
 	"flag"
 	"log"
 
-	"github.com/levon-dalakyan/chat-server/internal/app"
+	"github.com/ldevprog/chat-server/internal/app"
 )
 
 var configPath string

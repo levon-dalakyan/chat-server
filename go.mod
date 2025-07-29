@@ -1,4 +1,4 @@
-module github.com/levon-dalakyan/chat-server
+module github.com/ldevprog/chat-server
 
 go 1.23.0
 
@@ -9,7 +9,7 @@ require (
 	github.com/brianvoe/gofakeit/v7 v7.3.0
 	github.com/gojuno/minimock/v3 v3.4.5
 	github.com/joho/godotenv v1.5.1
-	github.com/levon-dalakyan/platform-common v0.1.2
+	github.com/ldevprog/platform-common v0.1.4
 	github.com/stretchr/testify v1.8.4
 	google.golang.org/grpc v1.73.0
 	google.golang.org/protobuf v1.36.6
@@ -39,4 +39,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/levon-dalakyan/chat-server/pkg/chat_v1 => ./pkg/chat_v1
+replace github.com/ldevprog/chat-server/pkg/chat_v1 => ./pkg/chat_v1

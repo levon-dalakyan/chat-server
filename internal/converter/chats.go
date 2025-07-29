@@ -1,8 +1,8 @@
 package converter
 
 import (
-	"github.com/levon-dalakyan/chat-server/internal/model"
-	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
+	"github.com/ldevprog/chat-server/internal/model"
+	desc "github.com/ldevprog/chat-server/pkg/chat_v1"
 )
 
 func ToChatCreateFromDesc(req *desc.CreateRequest) *model.ChatCreate {

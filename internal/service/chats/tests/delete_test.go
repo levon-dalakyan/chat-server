@@ -9,9 +9,9 @@ import (
 	"github.com/gojuno/minimock/v3"
 	"github.com/stretchr/testify/require"
 
-	"github.com/levon-dalakyan/chat-server/internal/repository"
-	"github.com/levon-dalakyan/chat-server/internal/repository/mocks"
-	"github.com/levon-dalakyan/chat-server/internal/service/chats"
+	"github.com/ldevprog/chat-server/internal/repository"
+	"github.com/ldevprog/chat-server/internal/repository/mocks"
+	"github.com/ldevprog/chat-server/internal/service/chats"
 )
 
 func TestDelete(t *testing.T) {

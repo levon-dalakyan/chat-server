@@ -4,16 +4,16 @@ import (
 	"context"
 	"log"
 
-	"github.com/levon-dalakyan/platform-common/pkg/closer"
-	"github.com/levon-dalakyan/platform-common/pkg/db"
-	"github.com/levon-dalakyan/platform-common/pkg/db/pg"
+	"github.com/ldevprog/platform-common/pkg/closer"
+	"github.com/ldevprog/platform-common/pkg/db"
+	"github.com/ldevprog/platform-common/pkg/db/pg"
 
-	chatsApi "github.com/levon-dalakyan/chat-server/internal/api/chats"
-	"github.com/levon-dalakyan/chat-server/internal/config"
-	"github.com/levon-dalakyan/chat-server/internal/repository"
-	chatsRepository "github.com/levon-dalakyan/chat-server/internal/repository/chats"
-	"github.com/levon-dalakyan/chat-server/internal/service"
-	chatsService "github.com/levon-dalakyan/chat-server/internal/service/chats"
+	chatsApi "github.com/ldevprog/chat-server/internal/api/chats"
+	"github.com/ldevprog/chat-server/internal/config"
+	"github.com/ldevprog/chat-server/internal/repository"
+	chatsRepository "github.com/ldevprog/chat-server/internal/repository/chats"
+	"github.com/ldevprog/chat-server/internal/service"
+	chatsService "github.com/ldevprog/chat-server/internal/service/chats"
 )
 
 type serviceProvider struct {

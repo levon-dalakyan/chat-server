@@ -11,11 +11,11 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/levon-dalakyan/chat-server/internal/api/chats"
-	"github.com/levon-dalakyan/chat-server/internal/model"
-	"github.com/levon-dalakyan/chat-server/internal/service"
-	"github.com/levon-dalakyan/chat-server/internal/service/mocks"
-	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
+	"github.com/ldevprog/chat-server/internal/api/chats"
+	"github.com/ldevprog/chat-server/internal/model"
+	"github.com/ldevprog/chat-server/internal/service"
+	"github.com/ldevprog/chat-server/internal/service/mocks"
+	desc "github.com/ldevprog/chat-server/pkg/chat_v1"
 )
 
 func TestSendMessage(t *testing.T) {

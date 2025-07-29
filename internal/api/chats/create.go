@@ -3,8 +3,8 @@ package chats
 import (
 	"context"
 
-	"github.com/levon-dalakyan/chat-server/internal/converter"
-	desc "github.com/levon-dalakyan/chat-server/pkg/chat_v1"
+	"github.com/ldevprog/chat-server/internal/converter"
+	desc "github.com/ldevprog/chat-server/pkg/chat_v1"
 )
 
 func (i *Implementation) Create(ctx context.Context, req *desc.CreateRequest) (*desc.CreateResponse, error) {

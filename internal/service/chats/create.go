@@ -3,7 +3,7 @@ package chats
 import (
 	"context"
 
-	"github.com/levon-dalakyan/chat-server/internal/model"
+	"github.com/ldevprog/chat-server/internal/model"
 )
 
 func (s *serv) Create(ctx context.Context, chat *model.ChatCreate) (int64, error) {
